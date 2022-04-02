@@ -17,7 +17,8 @@ def greet():
     with database.snapshot() as snapshot:
         results = snapshot.execute_sql("select message from greet where msg_id=1")
         for row in results:
-            return row['message']
+            print(row)
+            return row[0][0]
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
