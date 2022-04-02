@@ -85,3 +85,17 @@ resource "google_sourcerepo_repository" "repo" {
   # Waits for the source code repo API to be enabled
   depends_on = [google_project_service.enable_cloud_repo]
 }
+
+# Build trigger
+resource "google_cloudbuild_trigger" "cloud_build_trigger" {
+  description = "Cloud Source Repository Trigger hello-world (master)"
+
+  trigger_template {
+    branch_name = "master"
+    repo_name   = "hello-world"
+  }
+
+  filename = "cloudbuild.yaml"
+
+  depends_on = [google_sourcerepo_repository.repo]
+}
