@@ -95,6 +95,12 @@ resource "google_cloudbuild_trigger" "cloud_build_trigger" {
     repo_name   = "hello-world"
   }
 
+  substitutions = {
+    _LOCATION     = "us-central1"
+    _GCR_REGION   = "us"
+    _SERVICE_NAME = "app"
+  }
+
   filename = "cloudbuild.yaml"
 
   depends_on = [google_sourcerepo_repository.repo]
