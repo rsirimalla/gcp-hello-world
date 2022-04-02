@@ -7,14 +7,14 @@ steps:
         "--build-arg",
         "NODE_ENV=production",
         "-t",
-        "${_GCR_REGION}.gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$COMMIT_SHA",
+        "${_GCR_REGION}.gcr.io/$PROJECT_ID/${_SERVICE_NAME}",
         ".",
       ]
 
   # push the container image to Container Registry (GCR)
   - name: "gcr.io/cloud-builders/docker"
     args:
-      ["push", "${_GCR_REGION}.gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$COMMIT_SHA"]
+      ["push", "${_GCR_REGION}.gcr.io/$PROJECT_ID/${_SERVICE_NAME}"]
 
   # Deploy the container image to Cloud Run
   - name: "gcr.io/cloud-builders/gcloud"
@@ -22,12 +22,12 @@ steps:
       - run
       - deploy
       - ${_SERVICE_NAME}
-      - --image=${_GCR_REGION}.gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$COMMIT_SHA
+      - --image=${_GCR_REGION}.gcr.io/$PROJECT_ID/${_SERVICE_NAME}
       - --region=${_LOCATION}
       - --platform=managed
 
 images:
-  - "${_GCR_REGION}.gcr.io/$PROJECT_ID/${_SERVICE_NAME}:$COMMIT_SHA"
+  - "${_GCR_REGION}.gcr.io/$PROJECT_ID/${_SERVICE_NAME}"
 
 substitutions:
   _LOCATION: us-central1 # must be substituted

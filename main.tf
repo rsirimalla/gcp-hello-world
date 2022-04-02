@@ -50,7 +50,7 @@ resource "google_cloud_run_service" "run_service" {
   template {
     spec {
       containers {
-        image = "gcr.io/google-samples/hello-app:2.0"
+        image = "us.gcr.io/gcp-hello-world-2000/app"
       }
     }
   }
@@ -104,4 +104,12 @@ resource "google_cloudbuild_trigger" "cloud_build_trigger" {
   filename = "cloudbuild.yaml"
 
   depends_on = [google_sourcerepo_repository.repo]
+}
+
+resource "google_spanner_instance" "main-db" {
+  name         = "app-test"
+  config       = "regional-us-central1"
+  display_name = "app-test-instance-v1"
+  num_nodes    = 1
+
 }
