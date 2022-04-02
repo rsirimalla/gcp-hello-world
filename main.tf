@@ -18,6 +18,12 @@ resource "google_project_service" "enable_cloud_build" {
   disable_on_destroy = true
 }
 
+resource "google_project_service" "enable_cloud_repo" {
+  service = "sourcerepo.googleapis.com"
+
+  disable_on_destroy = true
+}
+
 resource "google_project_service" "enable_registry" {
   service = "containerregistry.googleapis.com"
 
@@ -69,4 +75,13 @@ resource "google_cloud_run_service_iam_member" "run_all_users" {
 # Display the service URL
 output "service_url" {
   value = google_cloud_run_service.run_service.status[0].url
+}
+
+
+# Create cloud repo
+resource "google_sourcerepo_repository" "repo" {
+  name = "hello-world"
+
+  # Waits for the source code repo API to be enabled
+  depends_on = [google_project_service.enable_cloud_repo]
 }
