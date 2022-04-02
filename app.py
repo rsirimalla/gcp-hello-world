@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "Hello World 2.0"
+    return "Hello World 3.0"
 
 @app.route("/greet")
 def greet():
@@ -18,7 +18,7 @@ def greet():
         results = snapshot.execute_sql("select message from greet where msg_id=1")
         for row in results:
             print(row)
-            return row[0][0]
+            return row[0]
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
