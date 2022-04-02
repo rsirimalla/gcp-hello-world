@@ -18,6 +18,12 @@ resource "google_project_service" "enable_cloud_build" {
   disable_on_destroy = true
 }
 
+resource "google_project_service" "enable_spanner" {
+  service = "spanner.googleapis.com"
+
+  disable_on_destroy = true
+}
+
 resource "google_project_service" "enable_cloud_repo" {
   service = "sourcerepo.googleapis.com"
 
@@ -106,10 +112,22 @@ resource "google_cloudbuild_trigger" "cloud_build_trigger" {
   depends_on = [google_sourcerepo_repository.repo]
 }
 
-resource "google_spanner_instance" "main-db" {
+resource "google_spanner_instance" "dbinstance" {
   name         = "app-test"
   config       = "regional-us-central1"
   display_name = "app-test-instance-v1"
   num_nodes    = 1
 
+  # Waits for the Cloud Run API to be enabled
+  depends_on = [google_project_service.enable_spanner]
+}
+
+resource "google_spanner_database" "database" {
+  instance = google_spanner_instance.dbinstance.name
+  name     = "test-db"
+
+  ddl = [
+    "CREATE TABLE greet (msg_id INT64 NOT NULL, message STRING(1024)) PRIMARY KEY(msg_id)"
+  ]
+  deletion_protection = false
 }
