@@ -5,10 +5,6 @@ import os
 app = Flask(__name__)
 
 @app.route("/")
-def hello():
-    return "Hello World 3.0"
-
-@app.route("/greet")
 def greet():
     spanner_client = spanner.Client()
     instance = spanner_client.instance("app-test")
@@ -16,9 +12,10 @@ def greet():
 
     with database.snapshot() as snapshot:
         results = snapshot.execute_sql("select message from greet where msg_id=1")
-        for row in results:
-            print(row)
-            return row[0]
+        if len(results) == 1:
+            return results[0][0]
+        else:
+            return "No one to geet you at the moment"        
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
