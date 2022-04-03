@@ -1,8 +1,10 @@
 FROM python:3.7
 
-COPY . /app
+COPY ./requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+
+COPY ./app /app
 WORKDIR /app
-RUN pip install flask google-cloud-spanner
 
 ENTRYPOINT ["python"]
 CMD ["app.py"]
