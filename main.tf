@@ -133,7 +133,7 @@ resource "google_spanner_database" "database" {
 }
 
 resource "null_resource" "setup_db" {
-  depends_on = ["google_spanner_database.database"] #wait for the db to be ready
+  depends_on = [google_spanner_database.database]
   provisioner "local-exec" {
     command = "gcloud spanner databases execute-sql test-db  --instance=app-test  --sql='insert into greet(msg_id,message) values(1,\"Hello World\")'"
   }
