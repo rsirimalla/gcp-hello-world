@@ -48,11 +48,14 @@ resource "google_cloud_run_service_iam_member" "run_all_users" {
   location = google_cloud_run_service.run_service.location
   role     = "roles/run.invoker"
   member   = "allUsers"
+
+  # Waits for APIs to be enabled
+  depends_on = [google_cloud_run_service.run_service]
 }
 
 # Create cloud repo
 resource "google_sourcerepo_repository" "repo" {
-  name = "hello-world"
+  name = var.cloud_repo_name
 
   # Waits for the APIs to be enabled
   depends_on = [google_project_service.enable_gcp_services]
