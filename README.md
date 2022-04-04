@@ -76,11 +76,17 @@ terraform destroy
 ```
 
 ### Monitoring
-* Monitroing keeps getting simple as you go from "you manage"(VMs) => "Managed" => "Serverless"
+* Setup "Uptime Checks"
+    * Ping health check every 1min
+    * Make sure the health endpoint access all layers of stack (ex:- retreive from DB)
+    * Create alerts
+    * Proactive measure
+* Dashboards
+    * Monitroing keeps getting simple as you go from "you manage"(VMs) => "Managed" => "Serverless"
     * "Cloud Run" default dashboard should help you with most the metrics you looking for
-    * Proactive
-* Set up alerts based on the pattern in logs
-    * Reactive
+* Alerts
+    * Set up alerts based on the pattern in logs like ERROR or EXCEPTION etc
+    * Reactive measure
 
 ### Custom domain
 * Coudn't perform domain mapping in a automated fashion since it required manual verification
