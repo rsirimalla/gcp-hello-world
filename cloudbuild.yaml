@@ -4,7 +4,6 @@ steps:
     args:
       [
         "build",
-        "--build-arg",
         "-t",
         "${_GCR_REGION}.gcr.io/$PROJECT_ID/${_SERVICE_NAME}",
         ".",
