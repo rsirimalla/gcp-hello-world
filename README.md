@@ -33,7 +33,7 @@ Hello World web application on GCP platform
 * `app` - folder contains application code
 * `requirements.txt` - Python dependencies
 * `Dockerfile` - Package application
-* `cloudbuild.yaml` - Steps to perfom on build machine
+* `cloudbuild.yaml` - Build and Deploy steps to perfom on build machine
 
 ### How to provision?
 * Pre-reqs
