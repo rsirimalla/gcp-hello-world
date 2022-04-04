@@ -28,6 +28,13 @@ Hello World web application on GCP platform
     * Good community support
     * Reusable modules for almost anything
 
+### Code organzation
+* `provision` - folder contains code required to provision infrastructure
+* `app` - folder contains application code
+* `requirements.txt` - Python dependencies
+* `Dockerfile` - Package application
+* `cloudbuild.yaml` - Steps to perfom on build machine
+
 ### How to provision?
 * Pre-reqs
     * `gcloud` cli
