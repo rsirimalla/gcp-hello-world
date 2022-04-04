@@ -53,13 +53,13 @@ Hello World web application on GCP platform
     terraform plan
     terraform apply
     ```
-* Make a not of output urls for cloud repo and cloud run service
+* Make a note of output urls for cloud repo and cloud run service
 
 ### How to setup CI/CD pipeline?
 * Add GIT remote and push
 ```
 $ git config --global credential.'https://source.developers.google.com'.helper gcloud.sh
-$ git remote add google https://source.developers.google.com/p/[PROJECT_ID]/r/[REPO_NAME]
+$ git remote add google <cloud repo URL from terraform output>
 $ git push google master
 ```
 
