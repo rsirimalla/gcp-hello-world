@@ -55,3 +55,9 @@ variable "db_name" {
   type        = string
   default     = "test-db"
 }
+
+variable "db_nodes" {
+  description = "Number of database nodes"
+  type        = number
+  default     = 1
+}

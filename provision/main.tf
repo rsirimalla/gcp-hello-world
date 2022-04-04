@@ -86,7 +86,7 @@ resource "google_spanner_instance" "dbinstance" {
   name         = var.db_instance_name
   config       = "regional-${var.location}"
   display_name = "${var.db_instance_name}-instance-v1"
-  num_nodes    = 1
+  num_nodes    = var.db_nodes
 
   # Waits for APIs to be enabled
   depends_on = [google_project_service.enable_gcp_services]
