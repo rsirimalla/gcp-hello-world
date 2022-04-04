@@ -63,7 +63,7 @@ resource "google_sourcerepo_repository" "repo" {
 
 # Build trigger
 resource "google_cloudbuild_trigger" "cloud_build_trigger" {
-  description = "Cloud Source Repository Trigger hello-world (master)"
+  description = "Cloud Source Repository Trigger ${var.cloud_repo_name} (master)"
 
   trigger_template {
     branch_name = var.branch_name
